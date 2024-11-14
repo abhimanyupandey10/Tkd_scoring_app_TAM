@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taekwondo Scoreboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+
+.scoreboard {
+    width: 100vw;
+    height: 100vh;
+    padding: 2vh 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1vh;
+    border-bottom: 2px solid #333;
+}
+
+.event-info p:first-child {
+    font-weight: bold;
+    font-size: 3vh;
+}
+
+.event-info p:nth-child(2) {
+    font-size: 2.5vh;
+    font-style: italic;
+}
+
+.title {
+    font-size: 5vh;
+    font-weight: bold;
+}
+
+.category {
+    font-size: 3vh;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding-top: 2vh;
+}
+
+.team {
+    width: 40vw;
+    text-align: center;
+    padding: 4vh;
+    color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+.team.red {
+    background-color: #990000;
+}
+
+.team.blue {
+    background-color: #000099;
+}
+
+.team .state {
+    font-size: 5vh;
+    font-style: italic;
+}
+
+.team .name {
+    font-size: 4vh;
+    font-weight: bold;
+}
+
+.team .score {
+    font-size: 50vh;
+    font-weight: bold;
+    margin: 5vh 0;
+}
+
+.team .gam-jeom {
+    font-size: 3vh;
+    position: absolute;
+    bottom: 2vh;
+    left: 0;
+    right: 0;
+}
+
+.center {
+    width: 20vw;
+    text-align: center;
+}
+
+.match-info {
+    font-size: 3vh;
+    margin-bottom: 4vh;
+    font-weight: bold;
+}
+
+.timer {
+    font-size: 15vh;
+    font-weight: bold;
+    color: #00ff00;
+    background-color: #333;
+    padding: 2vh 4vw;
+    border-radius: 5px;
+}
+
+
+</style>
+<body>
+    <div class="scoreboard">
+        <div class="header">
+            <div class="event-info">
+                <p>2nd Pune Taekwondo Festival</p>
+                <p>PUNE TAEKWONDO ASSOCIATION</p>
+            </div>
+            <div class="title">QUALIFICATIONS</div>
+            <div class="category">Under 8 : 23-27KG Boys</div>
+        </div>
+        <div class="main">
+            <div class="team red">
+                <p class="state">MAH</p>
+                <p class="name">Javed Azirifi</p>
+                <div class="score">0</div>
+                <p class="gam-jeom">GAM-JEOM 0</p>
+            </div>
+            <div class="center">
+                <div class="match-info">
+                    <p>Match</p>
+                    <p>0001</p>
+                </div>
+                <div class="timer">2:00</div>
+                <div class="match-info">
+<h1>Round <b class="roundno">1</b></h1>
+                </div>
+            </div>
+            <div class="team blue">
+                <p class="state">MAH</p>
+                <p class="name">Javed Azirifi</p>
+                <div class="score">0</div>
+                <p class="gam-jeom">GAM-JEOM 0</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    red_Score = 0
+    blue_Score = 0
+    red_gam = 0
+    blue_gam = 0
+    blue_vr = 1
+    red_vr = 1
+
+    blue_vr_on = 0
+    red_vr_on = 0
+
+    keshi_on = 0
+
+    
+
+
+    const channel = new BroadcastChannel('timer_channel');
+let timerInterval;
+let seconds = 120;
+
+function updateTimerDisplay() {
+    document.querySelector('.timer').textContent = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+}
+
+// Listen for timer actions from the other tab
+channel.onmessage = (event) => {
+    if (event.data.action === 'start') {
+        seconds = event.data.seconds;
+        timerInterval = setInterval(() => {
+            seconds--;
+            updateTimerDisplay();
+            if (seconds <= 0) clearInterval(timerInterval);
+        }, 1000);
+    } else if (event.data.action === 'stop') {
+        clearInterval(timerInterval);
+    }
+};
+
+
+</script>
+</html>

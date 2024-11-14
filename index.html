@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taekwondo Sensor Scoreboard</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <select name="matchType" id="matchType" class="match-type">
+            <option value="qualification">Qualification Round</option>
+            <option value="quarterfinal">Quarterfinals</option>
+            <option value="semifinal">Semifinals</option>
+            <option value="final">Finals</option>
+        </select>
+        <input type="text" placeholder="Enter Category" class="category-input">
+    </header>
+    
+    <div class="container-fluid main vh-100">
+        <div class="row h-100 no-gutters align-items-center">
+            <!-- Blue Side -->
+            <div class="col-5 d-flex flex-column align-items-center justify-content-center blue">
+                <div class="player-name" id="bluePlayer">Player Blue</div>
+                <div id="blueScore" class="score">0</div>
+                <div id="blueGamJeons" class="penalty">GAM-JEOM: 0</div>
+            </div>
+            
+            <!-- Center Section for Timer and Round -->
+<!-- Center Section for Timer and Round -->
+<div class="col-2 d-flex flex-column justify-content-center align-items-center center-section">
+    <div class="match-title">World Taekwondo</div>
+    <div id="timerDisplay" class="timer">2:00</div>
+    <div id="breakTimerDisplay" class="break-timer" style="display: none;">Break Time: 00:30</div>
+    <div id="winnerDisplay" class="winner-display" style="display: none;">Winner!</div> <!-- Winner declaration -->
+    <div id="roundInfo" class="round-info">ROUND 1</div>
+</div>
+
+
+            <!-- Red Side -->
+            <div class="col-5 d-flex flex-column align-items-center justify-content-center red">
+                <div class="player-name" id="redPlayer">Player Red</div>
+                <div id="redScore" class="score">0</div>
+                <div id="redGamJeons" class="penalty">GAM-JEOM: 0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include jQuery, Bootstrap JS, and custom script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
